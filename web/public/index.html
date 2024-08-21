@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Rater</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script type="text/javascript" src="./films.js"></script>
+</head>
+
+<body>
+
+    <h1>Welcome To the Movie Rating Form</h1>
+
+    <p id="introduction">
+        Hello and welcome to the movie rating form, please enter a movie and give it a rating from 1-5.
+        <br>
+        <br>
+        Once you are done adding your rated movie, you can click show ratings and see the movies you have rated below.
+        <br>
+        <br>
+        Before you can add rated movies, you first need to login. Login has a minimum of 4 and a maximum of 12
+        characters.
+    </p>
+
+    <br>
+
+    <form id="login" onsubmit="return API.login();">
+        <label for="login">Username:</label>
+        <input type="text" id="login" placeholder="Username" minlength="4" maxlength="12" required>
+        <br> <br>
+        <button type="submit">Login</button>
+    </form>
+
+    <br>
+
+    <form id="movieRater" onsubmit="return API.createFilm();">
+        <label for="movieName">Movie Name:</label>
+        <input type="text" id="movieName" placeholder="Title Name" required>
+        <br><br>
+
+        <label for="movieRating">Rating:</label>
+        <input type="number" name="movieRating" id="movieRating" placeholder="1-5" min="1" max="5" required>
+        <br><br>
+
+        <button type="submit">Add Rating</button>
+    </form>
+
+    <form id="showRatings" onsubmit="return API.getFilms();">
+        <button type="submit">Show Ratings</button>
+    </form>
+
+    <h2>Movies Rated</h2>
+    <table id="userRating">
+        <thead>
+            <tr>
+                <th id="tableHeader1">Movie Name</th>
+                <th id="tableHeader2">Rating</th>
+            </tr>
+        </thead>
+        <tbody id="dataTable">
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>
