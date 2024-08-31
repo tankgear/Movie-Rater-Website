@@ -13,8 +13,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/v1/films", async (req, res) => {
-  const films = await Film.find({});
-  res.json(films);
+  const film = await Film.find({});
+  res.json(film);
 });
 
 app.post("/api/v1/films", verifyToken, async (req, res) => {
@@ -33,6 +33,26 @@ app.post("/api/v1/login", (req, res) => {
     })
   });
 });
+
+app.put("/api/v1/update", async (req, res) => {
+  try {
+    const { name, rating } = req.body;
+
+    const updatedFilm = await Film.findOneAndUpdate(
+      { name: name }, { rating: rating }, { new: true }
+    );
+
+    if (!updatedFilm) {
+      return res.status(404).json({ message: "Film not found" });
+    }
+
+    res.json(updatedFilm);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers['authorization'];

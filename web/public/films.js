@@ -1,12 +1,15 @@
+const { json } = require("express");
+const { response } = require("../../films/app");
+
 var API = (() => {
     var jwtToken;
     var login = () => {
-        const val = document.getElementById("login").value;
+        const login = document.getElementById("login").value;
         try {
             fetch("http://10.0.0.69:8080/api/v1/login", {
                 method: 'POST',
                 body: JSON.stringify({
-                    username: val
+                    username: login
                 }),
                 headers: {
                     'Accept': 'application/json',
@@ -16,13 +19,13 @@ var API = (() => {
                 .then(data => {
                     jwtToken = data.token;
                     alert("Login successful");
-                    document.getElementById("login").reset();
                 });
         }
         catch (e) {
             console.log(e);
             console.log("----------------------------");
         }
+        document.getElementById("login").reset();
         return false;
     }
 
@@ -91,9 +94,45 @@ var API = (() => {
         return false;
     }
 
+    var updateFilm = () => {
+        const movieName = document.getElementById('updateMovieName').value;
+        const movieRating = document.getElementById('updateMovieRating').value;
+
+        try {
+            fetch("http://10.0.0.69:8080/api/v1/update", {
+                method: "PUT",
+                body: JSON.stringify({
+                    name: movieName, rating: movieRating
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            }).then(resp => {
+                if (!resp.ok) {
+                    alert("Failed to update film, please try again.");
+                    return;
+                }
+                return resp.json();
+            }).then(filmUpdate => {
+                if (filmUpdate) {
+                    alert("Film updated successfully.");
+                }
+            });
+
+        } catch (e) {
+            console.log(e);
+            console.log("----------------------------");
+        }
+        document.getElementById("updateMovie").reset();
+        return false;
+    }
+
+
     return {
         login,
         createFilm,
-        getFilms
+        getFilms,
+        updateFilm
     }
 })();
