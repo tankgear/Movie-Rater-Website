@@ -34,25 +34,19 @@ app.post("/api/v1/login", (req, res) => {
   });
 });
 
-app.put("/api/v1/update", async (req, res) => {
-  try {
-    const { name, rating } = req.body;
+app.put("/api/v1/films", async (req, res) => {
+  const { name, rating } = req.body;
+  const updatedFilm = await Film.findOneAndUpdate(
+    { name: name }, { rating: rating }, { new: true }
+  );
 
-    const updatedFilm = await Film.findOneAndUpdate(
-      { name: name }, { rating: rating }, { new: true }
-    );
-
-    if (!updatedFilm) {
-      return res.status(404).json({ message: "Film not found" });
-    }
-
-    res.json(updatedFilm);
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  if (!updatedFilm) {
+    return res.status(404).json({ message: "Film not found" });
   }
-});
 
+  res.json(updatedFilm);
+
+});
 
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers['authorization'];

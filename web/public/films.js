@@ -1,6 +1,3 @@
-const { json } = require("express");
-const { response } = require("../../films/app");
-
 var API = (() => {
     var jwtToken;
     var login = () => {
@@ -19,13 +16,13 @@ var API = (() => {
                 .then(data => {
                     jwtToken = data.token;
                     alert("Login successful");
+                    document.getElementById("login").reset();
                 });
         }
         catch (e) {
             console.log(e);
             console.log("----------------------------");
         }
-        document.getElementById("login").reset();
         return false;
     }
 
@@ -95,14 +92,14 @@ var API = (() => {
     }
 
     var updateFilm = () => {
-        const movieName = document.getElementById('updateMovieName').value;
-        const movieRating = document.getElementById('updateMovieRating').value;
+        const updateName = document.getElementById('updateMovie').value;
+        const updateRating = document.getElementById('updateRating').value;
 
         try {
-            fetch("http://10.0.0.69:8080/api/v1/update", {
+            fetch("http://10.0.0.69:8080/api/v1/films", {
                 method: "PUT",
                 body: JSON.stringify({
-                    name: movieName, rating: movieRating
+                    name: updateName, rating: updateRating
                 }),
                 headers: {
                     'Accept': 'application/json',
@@ -124,10 +121,9 @@ var API = (() => {
             console.log(e);
             console.log("----------------------------");
         }
-        document.getElementById("updateMovie").reset();
+        document.getElementById("updateMovieRating").reset();
         return false;
     }
-
 
     return {
         login,
