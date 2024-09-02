@@ -114,6 +114,7 @@ var API = (() => {
             }).then(filmUpdate => {
                 if (filmUpdate) {
                     alert("Film updated successfully.");
+                    document.getElementById("updateMovieRating").reset();
                 }
             });
 
@@ -121,7 +122,7 @@ var API = (() => {
             console.log(e);
             console.log("----------------------------");
         }
-        document.getElementById("updateMovieRating").reset();
+
         return false;
     }
 
