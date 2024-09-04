@@ -13,17 +13,13 @@
     <h1>Welcome To the Movie Rating Form</h1>
 
     <p id="introduction">
-        Hello and welcome to the movie rating form, please enter a movie and give it a rating from 1-5.
-        <br>
-        <br>
-        Once you are done adding your rated movie, you can click show ratings and see the movies you have rated below.
-        <br>
-        <br>
+        Hello and welcome to the movie rating form.
+    </p>
+
+    <p>
         Before you can add rated movies, you first need to login. Login has a minimum of 4 and a maximum of 12
         characters.
     </p>
-
-    <br>
 
     <form id="login" onsubmit="return API.login();">
         <h3>Login Here:</h3>
@@ -37,6 +33,9 @@
 
     <form id="movieRater" onsubmit="return API.createFilm();">
         <h3>Enter Movie and Ratings Here:</h3>
+        <p id="introduction">
+            Please enter a movie and give it a rating from 1-5.
+        </p>
         <label for="movieName">Movie Name:</label>
         <input type="text" id="movieName" placeholder="Title Name" required>
         <br><br>
@@ -48,23 +47,33 @@
         <button type="submit">Add Rating</button>
     </form>
 
-    <form id="showRatings" onsubmit="return API.getFilms();">
-        <button type="submit">Show Ratings</button>
-    </form>
-
     <br>
 
     <form id="updateMovieRating" onsubmit="return API.updateFilm();">
         <h3>Update Movie Rating:</h3>
-        <label for="updateMovie">Movie Name</label>
+        <p id="introduction">
+            If you want to change already rated movie, please entire the film already added and then enter in the new
+            rating.
+        </p>
+
+        <p>
+            After movie is updated, hit show ratings button again to see updated rating.
+        </p>
+        <label for="updateMovie">Movie Name:</label>
         <input type="text" id="updateMovie" placeholder="Title Name" required>
         <br><br>
 
-        <label for="updateRating">New Rating</label>
+        <label for="updateRating">New Rating:</label>
         <input type="number" id="updateRating" placeholder="1-5" min="1" max="5" required>
         <br><br>
 
         <button type="submit">Update Rating</button>
+    </form>
+
+    <br> <br>
+
+    <form id="showRatings" onsubmit="return API.getFilms();">
+        <button type="submit">Show Ratings</button>
     </form>
 
     <h2>Movies Rated</h2>
